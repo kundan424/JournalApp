@@ -46,6 +46,7 @@ public class JwtFilter extends OncePerRequestFilter{
 
             }
         }
+        response.addHeader("admin" , "kundan");
         chain.doFilter(request , response);
     }
 }

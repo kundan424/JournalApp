@@ -62,7 +62,8 @@ public class UserScheduler {
 //    }
 
 
-    @Scheduled(cron = "0 * * ? * *") // Runs at the start of every minute
+//    @Scheduled(cron = "0 * * ? * *") // Runs at the start of every minute
+    @Scheduled(cron = "0 0 9 ? * SUN") //
     public void fetchUsersAndSendSaMail(){
         List<UserEntry> users = userRepository.getUserForSA();
         for (UserEntry user : users){
