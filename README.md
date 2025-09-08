@@ -34,7 +34,7 @@ JournalApp is a full-featured journaling application that allows users to create
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/JournalApp.git](https://github.com/your-username/JournalApp.git)
+    git clone [https://github.com/kundan424/JournalApp.git](https://github.com/your-username/JournalApp.git)
     cd JournalApp
     ```
 
