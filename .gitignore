@@ -18,9 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-*.yml
 *.log
-*.xml
 *.mvn
 *.env
 ### NetBeans ###

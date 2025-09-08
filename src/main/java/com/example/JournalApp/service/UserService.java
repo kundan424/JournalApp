@@ -26,49 +26,49 @@ public class UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
+// for implementation of logging
 //     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public boolean saveNewUser(UserEntry user) {
-       try {
-           user.setPassword(passwordEncoder.encode(user.getPassword()));
-           user.setRoles(List.of("ROLE_USER")); // Use List.of()
-           userRepository.save(user);
-           return true;
-       }catch (Exception e){
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRoles(List.of("ROLE_USER")); // Use List.of()
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
 //           logger.info("Galti kar rhe ho tum!");
-           log.info("Galti kar rhe ho tum!");
-           log.debug("Galti kar rhe ho tum!");
-           log.warn("Galti kar rhe ho tum!");
-           log.error("Galti kar rhe ho tum!");
-           return false;
-       }
+            log.info("Galti kar rhe ho tum! ");
+            log.debug("Galti kar rhe ho tum!");
+            log.warn("Galti kar rhe ho tum!");
+            log.error("Galti kar rhe ho tum! {} :", user.getUsername(), e);
+            return false;
+        }
     }
 
-    public void saveAdmin(UserEntry user){
+    public void saveAdmin(UserEntry user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(List.of("ROLE_ADMIN" , "ROLE_USER"));
+        user.setRoles(List.of("ROLE_ADMIN", "ROLE_USER"));
         userRepository.save(user);
     }
 
 
-    public void saveUser(UserEntry userEntry){
+    public void saveUser(UserEntry userEntry) {
         userRepository.save(userEntry);
     }
 
-    public List<UserEntry> getAll(){
+    public List<UserEntry> getAll() {
         return userRepository.findAll();
     }
 
-    public Optional<UserEntry> findById(@PathVariable ObjectId myId){
+    public Optional<UserEntry> findById(@PathVariable ObjectId myId) {
         return userRepository.findById(myId);
     }
 
-    public void deleteById(@PathVariable ObjectId myId){
-         userRepository.deleteById(myId);
+    public void deleteById(@PathVariable ObjectId myId) {
+        userRepository.deleteById(myId);
     }
 
-    public UserEntry findByUsername(String userName){
-       return userRepository.findByUsername(userName);
+    public UserEntry findByUsername(String userName) {
+        return userRepository.findByUsername(userName);
     }
 }

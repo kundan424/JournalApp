@@ -7,7 +7,6 @@ import com.example.JournalApp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +23,6 @@ public class JournalEntryService {
 
     @Autowired
     private UserService userService;
-
 
 
     @Transactional
@@ -63,7 +61,7 @@ public class JournalEntryService {
                 journalEntryRepository.deleteById(id);
             }
         } catch (Exception e) {
-            log.error("Error ",e);
+            log.error("Error ", e);
             throw new RuntimeException("An error occurred while deleting the entry.", e);
         }
         return removed;

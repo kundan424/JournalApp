@@ -2,7 +2,6 @@ package com.example.JournalApp.filter;
 
 import com.example.JournalApp.service.UserDetailsServiceImpl;
 import com.example.JournalApp.utils.JwtUtil;
-import com.sun.jdi.event.StepEvent;
 import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,0 +1,103 @@
+spring:
+  # Redis Configuration
+  # -------------------
+  # Connects to a local Redis instance for caching.
+  # Make sure Redis is running on the default port.
+  redis:
+    host: localhost
+    port: 6379
+
+  # MongoDB Configuration
+  # ---------------------
+  # Replace the placeholder with your MongoDB connection string.
+  # For local development, you can use a local MongoDB instance.
+  # Example for local MongoDB: mongodb://localhost:27017/journalDB
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb+srv://<username>:<password>@cluster0.mongodb.net/?retryWrites=true&w=majority}
+      database: journalDB
+      auto-index-creation: true
+
+  # Email (SMTP) Configuration
+  # --------------------------
+  # Configure your SMTP server details to enable email sending.
+  # For Gmail, you may need to generate an "App Password".
+  mail:
+    host: smtp.gmail.com
+    port: 587 # Correct port for TLS
+    username: ${EMAIL_USERNAME:your-email@example.com}
+    password: ${EMAIL_PASSWORD:your-email-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+# Server Configuration
+# --------------------
+# Configures the embedded server (e.g., Tomcat).
+server:
+  port: 8080 # Default port is 8080, but you can change it
+  servlet:
+    context-path: /api/v1 # A common practice is to version your API
+
+# Logging Configuration
+# ---------------------
+# Uncomment to control logging levels for specific packages.
+# This can be useful for debugging.
+# logging:
+#   level:
+#     com:
+#       example:
+#         JournalApp:
+#           service:
+#             UserService: DEBUG
+
+# External API Keys
+# -----------------
+# It's recommended to store API keys and other secrets in environment variables
+# or a secure configuration management tool.
+weather:
+  api:
+    key: ${WEATHER_API_KEY:your_weather_api_key}
+
+# Kafka Configuration
+# -------------------
+# Configuration for Apache Kafka integration.
+# Update the bootstrap-servers with your Kafka broker addresses.
+kafka:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+  producer:
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  consumer:
+    group-id: my-journal-app-group
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    properties:
+      spring:
+        json:
+          trusted:
+            packages: com.example.JournalApp.model
+
+  # Security settings for Kafka (SASL/PLAIN)
+  # Uncomment and configure if your Kafka cluster requires authentication.
+  # properties:
+  #   security:
+  #     protocol: SASL_SSL
+  #   sasl:
+  #     mechanism: PLAIN
+  #     jaas:
+  #       config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='${KAFKA_USERNAME}' password='${KAFKA_PASSWORD}';"
+
+# JWT Secret Key for Token Generation
+# -----------------------------------
+# IMPORTANT: Use a strong, randomly generated secret key.
+# It is highly recommended to set this as an environment variable.
+jwt:
+  secret:
+    key: ${JWT_SECRET_KEY:your-super-secret-and-long-jwt-key}
